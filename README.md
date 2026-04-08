@@ -18,3 +18,21 @@ A helpful distinction for beginners is between causal loop diagrams (CLDs) and s
 Finally, an intro presentation should connect these tools to leverage points—places where a small change can produce large shifts in behavior. Stock-and-flow thinking often highlights leverage by showing (a) which flow dominates a stock’s trajectory, (b) which feedback loop is driving growth or decline, and (c) where delays or information distort decisions. Sometimes leverage is a parameter tweak (reduce churn), but often it is structural (change the feedback, shorten the delay, improve measurement, redefine the goal).
 
 If I had to summarize the “stocks and flows etc.” message in one line for an audience: events are the surface, stocks are the memory, flows are the mechanisms, feedback loops are the engines, and delays are the reason systems surprise us. That framing sets up an intro presentation that feels concrete, rigorous, and immediately applicable.
+
+## Lost-and-Found Ticket Classifier
+
+A runnable baseline classifier is included in `lost_found_classifier.py`.
+
+### What it does
+- Parses your provided `Ticket,Category` data while handling commas inside both ticket text and category names.
+- Trains a simple Multinomial Naive Bayes text classifier (pure Python).
+- Uses a **self-written scoring formula**:
+  - `score = TP / (TP + TN)`
+  - For multi-class labels, the script computes this one-vs-rest per class and averages (macro average).
+- **Iterates and re-runs training** across multiple attempts (different split seeds and smoothing values), evaluates each score, and keeps the best model.
+
+### Run
+
+```bash
+python3 lost_found_classifier.py
+```
